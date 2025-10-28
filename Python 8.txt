@@ -1,0 +1,19 @@
+код:
+def linear_search(arr, target):
+    for idx, val in enumerate(arr):
+        if val == target:
+            return idx
+    return -1
+
+if __name__ == "__main__":
+    data = [3, 5, 2, 7, 9, 1, 4]
+    print("Массив:", data)
+    pos = linear_search(data, 7)
+    print("Ищем 7 -> индекс:", pos)
+
+Пояснения
+enumerate даёт и индекс, и значение.
+Возвращаем индекс первого вхождения или -1.
+Результат работы кода:
+Массив: [3, 5, 2, 7, 9, 1, 4]
+Ищем 7 -> индекс: 3

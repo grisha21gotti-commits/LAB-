@@ -1,0 +1,40 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void selectionSort(vector<int>& a) {
+    int n = (int)a.size();
+    for (int i = 0; i < n - 1; ++i) {
+        int minPos = i;                     // предполагаем минимум на позиции i
+        for (int j = i + 1; j < n; ++j) {  // ищем настоящий минимум в хвосте
+            if (a[j] < a[minPos]) minPos = j;
+        }
+        if (minPos != i) {                  // если нашли меньший — меняем
+            swap(a[i], a[minPos]);
+        }
+    }
+}
+
+void printArr(const vector<int>& a, const string& title) {
+    cout << title << ": ";
+    for (int x : a) cout << x << " ";
+    cout << "\n";
+}
+
+int main() {
+    vector<int> arr = {64, 25, 12, 22, 11};
+    printArr(arr, "Исходный");
+    selectionSort(arr);
+    printArr(arr, "Отсортированный");
+    return 0;
+}
+
+Пояснения
+
+selectionSort: внешний цикл идёт по позициям i; внутренний ищет индекс минимума minPos на хвосте; затем один обмен.
+swap — стандартная функция обмена.
+printArr — печать с заголовком.
+Результаты работы кода:
+Исходный: 64 25 12 22 11 
+Отсортированный: 11 12 22 25 64 
+

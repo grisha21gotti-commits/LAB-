@@ -1,0 +1,59 @@
+код:
+public class BubbleSortOptimized {
+
+    public static void bubbleSortOptimized(int[] arr) {
+        int n = arr.length;
+        // Правая рабочая граница: дальше точно всё на своих местах
+        int right = n - 1;
+
+        while (right > 0) {
+            boolean swapped = false;
+            int lastSwapIndex = 0; // последняя позиция, где был обмен
+
+            for (int i = 0; i < right; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    int tmp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = tmp;
+
+                    swapped = true;
+                    lastSwapIndex = i; // фиксируем «новую» правую границу
+                }
+            }
+
+            // Если не было обменов — массив отсортирован, выходим
+            if (!swapped) break;
+
+            // Всё, что правее lastSwapIndex, уже на своих местах
+            right = lastSwapIndex;
+        }
+    }
+
+    public static void printArray(String title, int[] arr) {
+        System.out.print(title + ": ");
+        for (int x : arr) System.out.print(x + " ");
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] data1 = {3, 2, 1, 4, 5};     // почти отсортирован: выигрыш очевиден
+        int[] data2 = {64, 34, 25, 12, 22, 11, 90};
+
+        printArray("Исходный массив #1", data1);
+        bubbleSortOptimized(data1);
+        printArray("Отсортированный #1", data1);
+
+        System.out.println();
+
+        printArray("Исходный массив #2", data2);
+        bubbleSortOptimized(data2);
+        printArray("Отсортированный #2", data2);
+    }
+}
+
+Пояснения:swapped — флаг: были ли обмены на этом проходе. Если нет → массив уже отсортирован → break.
+
+lastSwapIndex — последний индекс, где был обмен. Всё, что правее, уже «уложено» → сужаем правую границу (меньше сравнений на следующих проходах).
+
+В лучшем случае (массива почти отсортирован) получаем близкую к O(n) работу.
+Пример работы кода:

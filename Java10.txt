@@ -1,0 +1,31 @@
+Код:
+public class InterpolationSearch {
+
+    public static int interpolationSearch(int[] a, int x) {
+        int lo = 0, hi = a.length - 1;
+
+        while (lo <= hi && x >= a[lo] && x <= a[hi]) {
+            if (a[hi] == a[lo]) {             // все значения равны
+                return (a[lo] == x) ? lo : -1;
+            }
+            // оценка позиции по интерполяции
+            int pos = lo + (int)((long)(hi - lo) * (x - a[lo]) / (a[hi] - a[lo]));
+
+            if (a[pos] == x) return pos;
+            if (a[pos] < x)  lo = pos + 1;
+            else             hi = pos - 1;
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 22, 35, 40, 45, 50, 80, 82, 85, 90, 100};
+        System.out.println("Ищем 85 -> индекс: " + interpolationSearch(arr, 85));
+        System.out.println("Ищем 77 -> индекс: " + interpolationSearch(arr, 77));
+    }
+}
+Пояснения:
+Проверка a[hi] == a[lo] защищает от деления на ноль.
+Оценка pos — линейная интерполяция по значениям.
+Результат программы:Ищем 85 -> индекс: 8
+Ищем 77 -> индекс: -1
